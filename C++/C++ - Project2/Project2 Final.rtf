@@ -1,0 +1,763 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 /*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Main\
+ */\
+\
+#include "Account.h"\
+#include "Savings.h"\
+#include "Checking.h"\
+#include "CreditCard.h"\
+\
+#include <string>\
+#include <iostream>\
+using namespace std;\
+\
+int main(int argc, const char * argv[])\
+\{\
+	Savings Savings1;\
+    Checking Checking1;\
+    CreditCard CreditCard1;\
+\
+	cout << "Enter First Name of the Account Holder: ";\
+	string nameyname;\
+	cin >> nameyname;\
+\
+	if(nameyname.length()>0 && nameyname.length()<=40)\{\
+	\
+		Checking1.setName(nameyname);\
+    Savings1.setName(nameyname);\
+    CreditCard1.setName(nameyname);\
+	\} else \{\
+			\
+		cout << "\\nInvalid Name\\n\\nTry Again";\
+			system("pause>nul");\
+		  exit(1);	\
+	\}\
+\
+	cout << "Enter valid 6 digit TAX ID: ";\
+	long taxid;\
+	cin >> taxid;\
+\
+	if(taxid > 99999 && taxid <1000000)\{\
+	\
+		Checking1.setTaxID(taxid);\
+    Savings1.setTaxID(taxid);\
+    CreditCard1.setTaxID(taxid);\
+	\} else \{\
+			\
+		cout << "\\nInvalid tax ID\\n\\nTry Again";\
+		system("pause>nul");\
+		  exit(1);	\
+	\}\
+\
+\
+    Checking1.setBalance(100);\
+    Savings1.setBalance(100);\
+    CreditCard1.setBalance(100);\
+    \
+    int choice=1;\
+    int j= 0;\
+	int checknum = 0;\
+    \
+    while(choice!=0)\{\
+\
+		cout <<"\\nChecking Balance: "<< Checking1.getBalance() << "\\t  Savings Balance: "<< Savings1.getBalance() << "\\t  Credit Card Balance: "<<CreditCard1.getBalance();\
+\
+\
+\
+        cout << "\\n\\nMenu:";\
+        cout << "\\n1. Savings Deposit \\n2. Savings Withdrawl \\n3. Checking Deposit \\n4. Write A Check \\n5. Credit Card Payment \\n6. Make A Charge(Credit Card) \\n7. Display Savings \\n8. Display Checking \\n9. Display Credit Card \\n0. Exit";\
+        cout << "\\n\\nMenu Choice: ";\
+        cin >> choice;\
+        if (choice >=0 && choice <=9) \{\
+            \
+            \
+            switch(choice)\{\
+                    \
+                case 0:\{\
+                    //Exit\
+                    exit(1);\
+                    \
+                    break;\
+                \}\
+                case 1:\{\
+                    //Savings Deposit\
+                    cout << "\\nSavings Deposit Amount: ";\
+                    double deposit;\
+                    cin >>deposit;\
+                    if (deposit>0)\{\
+                        double newbal = Savings1.getBalance() + deposit;\
+                        \
+                        Savings1.makeDeposit(newbal);\
+                        \
+                    \} else \{\
+                        cout << "\\nInvalid Deposit Amount\\n";\
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 2:\{\
+                    //Savings withdrawl\
+                    cout << "\\nSavings Withdrawl Amount: ";\
+                    double amount;\
+                    cin >> amount;\
+                    if(amount > 0 && Savings1.getBalance() > amount)\{\
+                        \
+                        Savings1.DoWithdrawl(amount);\
+                    \}\
+                    else\{\
+                        \
+                        cout << "\\nInvalid Withdrawl Amount\\n";\
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 3:\{\
+                    //Checking Deposit\
+                    cout << "\\nChecking Deposit amount: ";\
+                    double amount;\
+                    cin >> amount;\
+                    if (amount>0)\{\
+                        \
+						double newbal = Checking1.getBalance() + amount;\
+                        Checking1.makeDeposit(newbal);\
+                        \
+                    \}else\{\
+                        cout << "\\nInvalid deposit amount\\n";\
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 4:\{\
+                    //Write A Check\
+                    cout << "\\nCheck AMOUNT: ";\
+                    double amount;\
+                    cin >> amount;\
+					if(checknum == 0)\{\
+                    cout << "\\nEnter Valid 4 Digit Check NUMBER: ";\
+					cin >> checknum;\
+					\}\
+                    if (checknum >999 && checknum<10000) \{\
+\
+                        Checking1.WriteCheck(checknum, amount,j);\
+\
+				\
+                    \} else \{\
+                        \
+                        cout << "\\nInvalid Check Number\\n";    \
+                        \
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 5:\{\
+                    //Credit Card Payment\
+                    \
+                    cout << "\\nCredit Card PAYMENT Amount: ";\
+                    double pamount;\
+                    cin >> pamount;\
+                    \
+                    if (pamount>0 && pamount<=CreditCard1.getBalance()) \{\
+                        \
+                    CreditCard1.MakePayment(pamount);\
+                    \} else \{\
+                        cout << "\\nInvalid Payment Amount\\n";\
+\
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 6:\{\
+                    //Charge Credit Card\
+                    cout << "\\nCredit Card CHARGE Amount: ";\
+                    double camount;\
+                    cin >> camount;\
+                    \
+                    cout << "\\nWhere is the Credit Card being Charged?: ";\
+                    string name;\
+                    cin >> name;\
+                    \
+                    if (camount>0)\
+                    \{\
+                    CreditCard1.DoCharge(name, camount);\
+                    \} else \{\
+                        cout << "\\nInvalid Charge Amount\\n";\
+                    \}\
+                    \
+                    break;\
+                \}\
+                case 7:\{\
+                    //Display Savings\
+                    Savings1.display();\
+                    \
+                    break;\
+                \}\
+                case 8:\{\
+                    //Display Checking\
+                    Checking1.display();\
+                    \
+                    \
+                    break;\
+                \}\
+                case 9:\{\
+                    //Display Credit Card\
+                    CreditCard1.display();\
+                    \
+                    \
+                    break;\
+                \}\
+			\}\
+		\}\
+	\}\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Account - Header File\
+ */\
+\
+#pragma once\
+\
+#include <string>\
+#include <iostream>\
+using namespace std;\
+\
+class Account\{\
+    \
+public:\
+    \
+    static const int lasten = 10;\
+    \
+    Account();\
+    \
+    Account(string Name, long Taxid, double Balance);\
+    \
+    void setName(string name);\
+    void setTaxID(long TaxID);\
+    void setBalance(double Balance);\
+    \
+    void display();\
+    \
+    string getName();\
+    long getTaxID();\
+    double getBalance();\
+    \
+    void makeDeposit(double Amount);\
+    \
+    \
+protected:\
+    \
+    double withdrawlist[lasten];\
+    double depositlist[lasten];\
+    int numdeposits;\
+    int numwithdrawls;\
+    \
+    \
+private:\
+    string name;\
+    long taxID;\
+    double balance;\
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Account - CPP file\
+ */\
+#include "Account.h"\
+#include <string>\
+using namespace std;\
+\
+Account::Account(string Name, long Taxid, double Balance)\{\
+    name = Name;\
+    taxID = Taxid;\
+    balance = Balance;\
+    \
+\}\
+\
+Account::Account()\{\
+    name = " ";\
+    taxID = 0;\
+    balance = 0;\
+    \
+\}\
+\
+void Account::setName(string Name)\{\
+    if (Name.length()>0 && Name.length()<40)\{\
+        \
+        name = Name;\
+    \}\
+    \
+\}\
+\
+void Account::setTaxID(long TaxID)\{\
+    if (TaxID>99999 && TaxID<=999999)\{\
+        taxID = TaxID;\
+        \
+    \}\
+\}\
+\
+void Account::setBalance(double Balance)\{\
+    if (Balance >0 && Balance<100000000) \{\
+        balance=Balance;\
+    \}\
+    \
+\}\
+\
+string Account::getName()\{\
+    return name;\
+\}\
+\
+long Account::getTaxID()\{\
+    \
+    return taxID;\
+\}\
+\
+double Account::getBalance()\{\
+    \
+    return balance;\
+\}\
+\
+void Account::makeDeposit(double Amount)\{\
+    setBalance(Amount);\
+    \
+\}\
+\
+void Account::display()\{\
+    cout << "Name = "<< getName();\
+    cout << "Tax ID = "<< getTaxID();\
+    cout << "Balance = "<< getBalance();\
+    \
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Checking - Header File\
+ */\
+\
+#pragma once\
+\
+#include <iostream>\
+#include "Account.h"\
+\
+using namespace std;\
+class Checking : public Account\{\
+    \
+public:\
+\
+	int k;\
+\
+    void WriteCheck(int CheckNum, double Amount, int j);\
+    \
+    Checking();\
+    \
+    Checking(string Name, long TaxiD, double Balance);\
+    \
+    void display();\
+    \
+    \
+private:\
+	double checkamount[25];\
+    int last10checks[10];\
+    \
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Checking - CPP file\
+ */\
+\
+#include "Checking.h"\
+using namespace std;\
+\
+void Checking::WriteCheck(int CheckNum, double Amount, int j)\{\
+    \
+    if (Amount >0 && getBalance()>=Amount) \{\
+        \
+		CheckNum+=k;\
+		\
+        last10checks[k] = CheckNum;\
+		checkamount[k] = Amount;\
+		k++;\
+		\
+		double newbal = getBalance()- Amount;\
+		setBalance(newbal);\
+        \
+    \} else \{\
+        cout << "\\nInvalid Check Amount\\n";\
+    \}\
+\}\
+\
+Checking::Checking()\{\
+    k = 0;\
+    \
+\}\
+\
+Checking::Checking(string Name, long TaxiD, double Balance)\{\
+    \
+    k=0;\
+\}\
+\
+void Checking::display()\{\
+ \
+		cout << "\\n\\n\\n-Checking-";\
+    cout << "\\nName = "<< getName();\
+    cout << "\\tTax ID = "<< getTaxID();\
+    cout << "\\t  Balance = "<< getBalance();\
+\
+	cout << "\\n\\nChecks Written:\\n";\
+	for(int i=0;i<k;i++)\{\
+		cout << "\\nNumber: " << last10checks[i] << "\\tAmount: " << checkamount[i];\
+\
+	\}\
+		cout << "\\n\\nAll Deposits:\\n";\
+		\
+	 cout << "\\n\\n\\n";\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Savings - Header File\
+ */\
+\
+#pragma once\
+\
+#include <iostream>\
+#include "Account.h"\
+\
+using namespace std;\
+class Savings : public Account\
+\{\
+    \
+public:\
+    \
+	int k;\
+\
+	double withdrawls[20];\
+\
+    Savings();\
+    \
+    Savings(string Name, long TaxiD, double Balance);\
+    \
+    void DoWithdrawl(double amount);\
+    \
+    void display();\
+    \
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ Savings - CPP file\
+ */\
+\
+#include "Savings.h"\
+using namespace std;\
+\
+Savings::Savings()\{\
+    k=0;\
+\}\
+\
+Savings::Savings(string Name, long TaxiD, double Balance)\{\
+    k=0;\
+    \
+\}\
+\
+void Savings::DoWithdrawl(double amount)\{\
+\
+    double newbal = (getBalance() - amount);\
+    setBalance(newbal);\
+	\
+	withdrawls[k] = amount;\
+	k++;\
+\}\
+\
+void Savings::display()\{\
+\
+	    cout << "\\n\\n\\n-Savings-";\
+    cout << "\\nName = "<< getName();\
+    cout << "\\tTax ID = "<< getTaxID();\
+    cout << "\\t  Balance = "<< getBalance();\
+\
+	cout << "\\n\\nWithdrawls: \\n";\
+	for(int i=0;i<k;i++)\{\
+		cout << "\\n"<< i+1 << "). " << withdrawls[i];\
+	\}\
+	 cout << "\\n\\n";\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ CreditCard - Header File\
+ */\
+\
+#pragma once\
+\
+#include <iostream>\
+#include "Account.h"\
+\
+using namespace std;\
+class CreditCard : public Account\{\
+    \
+    \
+public:\
+    \
+	double payments[25];\
+\
+    int k;\
+\
+	int p;\
+    \
+    void DoCharge(string name, double amount);\
+    \
+    void MakePayment(double amount);\
+    \
+    CreditCard();\
+    \
+    CreditCard(string Name, long TaxID, double Balance);\
+    \
+    void display();\
+    \
+    \
+private:\
+    long cardnumber;\
+    string last10charges[10];\
+\
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+/*\
+ Project2\
+ C++\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Robert Florence\
+ Simple project demonstrating inheritance\
+ between banking account objects\
+ CreditCard - CPP file\
+ */\
+\
+#include "CreditCard.h"\
+#include <sstream>\
+using namespace std;\
+\
+void CreditCard::DoCharge(string name, double amount)\{\
+	\
+	if (name.length()>0 && name.length()<=40)\{\
+  \
+    string samount = to_string(amount);\
+	stringstream ss;\
+	ss << name << " - " << samount;\
+\
+	string charge = ss.str();\
+\
+    last10charges[k] = charge;\
+\
+	double newbal = getBalance()+ amount;\
+	setBalance(newbal);\
+\
+    k++;\
+    \} else \{\
+        cout << "\\nInvalid Charge Name\\n";\
+    \}\
+\}\
+\
+void CreditCard::MakePayment(double amount)\{\
+\
+	double newbal = getBalance()- amount;\
+		setBalance(newbal);\
+\
+		payments[p]= amount;\
+		p++;\
+\}\
+\
+CreditCard::CreditCard()\{\
+	k=0;\
+	p=0;\
+\}\
+\
+CreditCard::CreditCard(string Name, long TaxID, double Balance)\{\
+    k=0;\
+	p=0;\
+\}\
+\
+void CreditCard::display()\{\
+	cout << "\\n\\n-Credit Card-\\n";\
+    cout << "Name: "<< getName() << "\\tTax ID: "<< getTaxID() << "    Balance: "<<getBalance() <<"\\n\\n";\
+\
+	cout << "\\nLast 10 Charges:\\n";\
+	for(int i=0;i<k;i++)\{\
+		cout << "\\n"<< i+1 << ")." <<last10charges[i];\
+\
+	\}\
+\
+	cout << "\\nLast 10 Payments:\\n";\
+	for(int i=0;i<p;i++)\{\
+		cout << "\\n"<< i+1 << ")." <<payments[i];\
+\
+	\}\
+\
+\
+	cout << "\\n\\n\\n";\
+\}}

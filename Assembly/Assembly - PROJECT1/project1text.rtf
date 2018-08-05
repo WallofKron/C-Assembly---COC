@@ -1,0 +1,257 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green128\blue0;\red0\green0\blue255;\red163\green21\blue21;
+\red43\green131\blue159;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab529
+\pard\tx529\pardeftab529\pardirnatural
+
+\f0\fs22 \cf2 \CocoaLigature0 /*\
+ Project1\
+ Robert Florence\
+ CS 122\
+ Assembly\
+ Prof. Ferguson\
+ Practice problems\
+ 2.6\
+ */\cf0 \
+\
+\cf3 #include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 int\cf0  main () \{\
+    \cf3 int\cf0  exam1;\
+    \cf3 int\cf0  base;\
+    \cf3 int\cf0  divisor;\
+    \cf3 int\cf0  remainder;\
+    \cf5 cout\cf0  << \cf4 "Enter 2 numbers (1-100) and a base 0-9: "\cf0 ;\
+    \
+    \cf5 cin\cf0  >> exam1 >> base;\
+    \
+    \cf3 while\cf0  (exam1>0) \{\
+        \cf5 cout\cf0  << \cf4 "\\n"\cf0 ;\
+\
+        remainder = (exam1%base);\
+        \cf5 cout\cf0  << remainder << \cf5 endl\cf0 ;\
+    \
+        divisor = (exam1/base);\
+        exam1 = divisor;\
+\
+    \}\
+    \cf3 return\cf0  0;\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ Project1\
+ Robert Florence\
+ CS 122\
+ Assembly\
+ Prof. Ferguson\
+ Practice problems\
+ 2.10\
+ */\cf0 \
+\
+\cf3 #include \cf4 <iostream>\cf3 \
+#include \cf4 <cmath>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\cf3 int\cf0  main(\cf3 int\cf0  argc, \cf3 const\cf0  \cf3 char\cf0  * argv[])\
+\{\
+    \
+    \cf3 const\cf0  \cf3 int\cf0  base2 = 2, base3 = 3, base8 = 8, base10 = 10, base16 = 16;\
+    \
+    \cf3 int\cf0  num, checker = 0, newnum;\
+    \cf3 const\cf0  \cf3 int\cf0  power = 4;\
+    \
+    \cf3 do\cf0  \{\
+        \
+        \cf5 cout\cf0  << \cf4 "Enter a number base (2, 3, 8, 10 or 16): "\cf0 ;\
+        \
+        \cf5 cin\cf0  >> num;\
+        \
+        \cf3 if\cf0  (num == base2) \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Base 2 - Binary - (0 & 1)\\nFirst Four Powers (0-3): "\cf0 ;\
+            checker = 0;\
+            \cf3 for\cf0  (\cf3 int\cf0  i=0; i<power; i++) \{\
+            \
+                newnum = \cf5 pow\cf0 (base2,i);\
+                \cf5 cout\cf0  << newnum << \cf4 "  "\cf0 ;\
+                \
+            \
+            \}\
+            \
+        \} \cf3 else\cf0  \cf3 if\cf0  (num == base3) \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Base 3 - Trinary - (0 - 2)\\nFirst Four Powers (0-3): "\cf0 ;\
+            checker = 0;\
+            \cf3 for\cf0  (\cf3 int\cf0  i=0; i<power; i++) \{\
+                \
+                newnum = \cf5 pow\cf0 (base3,i);\
+                \cf5 cout\cf0  << newnum << \cf4 "  "\cf0 ;\
+                \
+                \
+            \}\
+            \
+        \} \cf3 else\cf0  \cf3 if\cf0  (num == base8) \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Base 8 - Octal - (0 - 7)\\nFirst Four Powers (0-3): "\cf0 ;\
+            checker = 0;\
+            \cf3 for\cf0  (\cf3 int\cf0  i=0; i<power; i++) \{\
+                \
+                newnum = \cf5 pow\cf0 (base8,i);\
+                \cf5 cout\cf0  << newnum << \cf4 "  "\cf0 ;\
+                \
+                \
+            \}\
+            \
+            \
+        \} \cf3 else\cf0  \cf3 if\cf0  (num == base10) \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Base 10 - Decimal - (0 - 9)\\nFirst Four Powers (0-3): "\cf0 ;\
+            checker = 0;\
+            \cf3 for\cf0  (\cf3 int\cf0  i=0; i<power; i++) \{\
+                \
+                newnum = \cf5 pow\cf0 (base10,i);\
+                \cf5 cout\cf0  << newnum << \cf4 "  "\cf0 ;\
+                \
+                \
+            \}\
+            \
+        \} \cf3 else\cf0  \cf3 if\cf0  (num == base16)\{\
+            \
+            \cf5 cout\cf0  << \cf4 "Base 16 - Hexidecimal - (0 - F)\\nFirst Four Powers (0-3): "\cf0 ;\
+            checker = 0;\
+            \cf3 for\cf0  (\cf3 int\cf0  i=0; i<power; i++) \{\
+                \
+                newnum = \cf5 pow\cf0 (base16,i);\
+                \cf5 cout\cf0  << newnum << \cf4 "  "\cf0 ;\
+                \
+            \
+            \}\
+            \
+        \} \cf3 else\cf0  \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Incorrect input, Try Again...\\n"\cf0 ;\
+            checker = -1;\
+        \}\
+        \
+    \} \cf3 while\cf0  (checker == -1);\
+    \
+    \
+    \cf3 return\cf0  0;\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ Project1\
+ Robert Florence\
+ CS 122\
+ Assembly\
+ Prof. Ferguson\
+ Practice problems\
+ 2.12\
+ */\cf0 \
+\
+\cf3 #include \cf4 <iostream>\cf3 \
+#include \cf4 <string>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 int\cf0  main () \{\
+    \cf3 int\cf0  guess;\
+    \cf5 string\cf0  hex;\
+    \cf5 cout\cf0  << \cf4 "Enter a number 0 - 15: "\cf0 ;\
+    \cf5 cin\cf0  >> guess;\
+    \cf5 cout\cf0  << \cf4 "\\n"\cf0 ;\
+    \cf3 if\cf0  (guess >= 0 && guess <= 15) \{\
+        \cf3 switch\cf0  (guess) \{\
+            \cf3 case\cf0  0: hex = \cf4 "0"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  1: hex = \cf4 "1"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  2: hex = \cf4 "2"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  3: hex = \cf4 "3"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  4: hex = \cf4 "4"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  5: hex = \cf4 "5"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  6: hex = \cf4 "6"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  7: hex = \cf4 "7"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  8: hex = \cf4 "8"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  9: hex = \cf4 "9"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  10: hex = \cf4 "A"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  11: hex = \cf4 "B"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  12: hex = \cf4 "C"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  13: hex = \cf4 "D"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  14: hex = \cf4 "E"\cf0 ; \cf3 break\cf0 ;\
+            \cf3 case\cf0  15: hex = \cf4 "F"\cf0 ; \cf3 break\cf0 ;\
+            \
+        \}\
+        \cf5 cout\cf0  << \cf4 "your decimal: "\cf0  << guess << \cf4 " in Hexidecimal is: "\cf0 << hex <<\cf4 "\\n"\cf0 ;\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Wrong Input, Try Again!"\cf0  << \cf5 endl\cf0 ;\
+\
+    \}\
+    \cf3 return\cf0  0;\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ Project1\
+ Robert Florence\
+ CS 122\
+ Assembly\
+ Prof. Ferguson\
+ Practice problems\
+ 2.13\
+ */\cf0 \
+\
+\cf3 #include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 char\cf0  ltr;\
+\cf3 int\cf0  power2 = 8;\
+\cf3 int\cf0  result = 0;\
+\
+\cf3 int\cf0  main () \{\
+    \
+    \cf5 cout\cf0  << \cf4 "Enter Four 1's and 0's followed by a '*': "\cf0  << \cf5 endl\cf0 ;\
+    \cf5 cin\cf0  >> \cf5 ltr\cf0 ;\
+    \cf3 while\cf0  (\cf5 ltr\cf0  != '*') \{\
+        \cf3 if\cf0  (\cf5 ltr\cf0  == '1') \{\
+            \cf5 result\cf0  = \cf5 result\cf0 +\cf5 power2\cf0 ;\
+        \}\
+    \
+        \cf5 power2\cf0 = (\cf5 power2\cf0 /2);\
+        \cf5 cin\cf0  >> \cf5 ltr\cf0 ;\
+    \}\
+    \
+    \cf5 cout\cf0  << \cf4 "The Binary you entered, is "\cf0  <<\cf5 result\cf0  << \cf4 " in decimal (base 10)"\cf0  <<\cf5 endl\cf0 ;\
+    \
+    \cf3 return\cf0  0;\
+\}}

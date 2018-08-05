@@ -1,0 +1,839 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green128\blue0;\red0\green0\blue255;\red163\green21\blue21;
+\red43\green131\blue159;}
+\margl1440\margr1440\vieww10800\viewh15840\viewkind0
+\deftab529
+\pard\tx529\pardeftab529\pardirnatural
+
+\f0\fs22 \cf2 \CocoaLigature0 /*\
+ Main.cpp\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance \
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\
+\cf2 //#include "stdafx.h"\cf0 \
+\cf3 #include \cf4 <cstdlib>\cf3 \
+#include \cf4 <ctime>\cf3  \cf2 // Needed for randomization\cf0 \
+\cf3 #include \cf4 <iostream>\cf3 \
+#include \cf4 "Enemy.h"\cf3 \
+#include \cf4 "CarJacker.h"\cf3 \
+#include \cf4 "Helicopter.h"\cf3 \
+#include \cf4 "PitBull.h"\cf3 \
+\cf0 \
+\cf3 using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 int\cf0  main(\cf3 int\cf0  argc, \cf3 const\cf0  \cf3 char\cf0  * argv[])\
+\{\
+    \cf3 int\cf0  xRan;\
+     \cf5 srand\cf0 (\cf5 time\cf0 (\cf3 NULL\cf0 ));\
+    \
+    \cf3 const\cf0  \cf3 int\cf0  max_enemy = 20;\
+    \cf5 Enemy\cf0 * enemy_ptr[max_enemy];\
+    \cf3 int\cf0  num_enemy;\
+    \
+    \cf5 CarJacker\cf0  CJ1;\
+    num_enemy++;\
+    \
+    \cf5 Helicopter\cf0  Heli1;\
+    num_enemy++;\
+    \
+    \cf5 PitBull\cf0  Pit1;\
+    num_enemy++;\
+    \
+        enemy_ptr[0] = &CJ1;\
+        enemy_ptr[1] = &Heli1;\
+        enemy_ptr[2] = &Pit1;\
+    \
+    \cf3 while\cf0  ( \cf3 true\cf0  ) \{\
+        \
+        \cf3 for\cf0  (\cf3 int\cf0  j=0; j<num_enemy; j++) \{\
+            \
+            enemy_ptr[j]->\cf5 move_position\cf0 ();\
+        \}\
+        \cf5 cout\cf0  << \cf5 endl\cf0 ;\
+        \
+        xRan = \cf5 rand\cf0 ()%num_enemy;\
+\
+        \cf2 // fire weapon\cf0 \
+        enemy_ptr[xRan]->\cf5 fire_weapon\cf0 ();\
+        \
+        \cf5 cout\cf0  << \cf5 endl\cf0 ;\
+        \
+        xRan = \cf5 rand\cf0 ()%num_enemy;\
+        \
+        \cf2 // Pick a random Enemy to update_status\cf0 \
+        enemy_ptr[xRan]->\cf5 update_status\cf0 ();\
+        \
+        \cf5 cout\cf0  << \cf4 "\\n\\n"\cf0 ;\
+\
+		system(\'93pause\'94);\
+        \
+    \}\
+    \cf3 return\cf0  0;\
+    \
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ ENEMY - cpp\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\
+\cf3 #include \cf4 "Enemy.h"\cf3 \
+#include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::move_position()\{\};\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::fire_weapon()\{\};\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::update_status()\{\};\
+\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::setXpos(\cf3 int\cf0  xpos)\{\
+\
+    \cf3 if\cf0 (xpos>=0 && xpos<=800)\{\
+    \
+        \cf5 x_pos\cf0  = xpos;\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Invalid X POS."\cf0 ;\
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::setYpos(\cf3 int\cf0  ypos)\{\
+    \
+    \cf3 if\cf0 (ypos>=0 && ypos<=600)\{\
+        \
+        \cf5 y_pos\cf0  = ypos;\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Invalid Y POS."\cf0 ;\
+    \}\
+\}\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::setWidth(\cf3 int\cf0  Width)\{\
+    \cf3 if\cf0  (Width > 0 && Width < 150) \{\
+        \cf5 width\cf0  = Width;\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Invalid WIDTH"\cf0 ;\
+    \}\
+\}\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::setHeight(\cf3 int\cf0  Height)\{\
+    \cf3 if\cf0  (Height > 0 && Height < 100) \{\
+        \cf5 height\cf0  = Height;\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Invalid HEIGHT"\cf0 ;\
+    \}\
+\}\
+\cf3 void\cf0  \cf5 Enemy\cf0 ::setStatus(\cf3 int\cf0  Status)\{\
+\
+    \cf3 if\cf0  (Status >= 0 && Status <= 8) \{\
+        \cf5 status\cf0  = Status;\
+    \}\
+\}\
+\
+\
+\cf3 int\cf0  \cf5 Enemy\cf0 ::getXpos()\{\
+\
+    \cf3 return\cf0  \cf5 x_pos\cf0 ;\
+\}\
+\cf3 int\cf0  \cf5 Enemy\cf0 ::getYpos()\{\
+    \
+    \cf3 return\cf0  \cf5 y_pos\cf0 ;\
+\}\
+\cf3 int\cf0  \cf5 Enemy\cf0 ::getWidth()\{\
+    \
+    \cf3 return\cf0  \cf5 width\cf0 ;\
+\}\
+\cf3 int\cf0  \cf5 Enemy\cf0 ::getHeight()\{\
+    \
+    \cf3 return\cf0  \cf5 height\cf0 ;\
+\}\
+\cf3 int\cf0  \cf5 Enemy\cf0 ::getStatus()\{\
+    \
+    \cf3 return\cf0  \cf5 status\cf0 ;\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ ENEMY - Header\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\cf3 #pragma once\
+#include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf3 class\cf0  Enemy\{\
+    \
+\cf3 public\cf0 :\
+    \
+    \cf3 virtual\cf0  \cf3 void\cf0  move_position()=0;\
+    \cf3 virtual\cf0  \cf3 void\cf0  fire_weapon()=0;\
+    \cf3 virtual\cf0  \cf3 void\cf0  update_status()=0;\
+    \
+\cf3 protected\cf0 :\
+    \
+    \cf3 void\cf0  setXpos(\cf3 int\cf0  xpos);\
+    \cf3 void\cf0  setYpos(\cf3 int\cf0  ypos);\
+    \cf3 void\cf0  setWidth(\cf3 int\cf0  Width);\
+    \cf3 void\cf0  setHeight(\cf3 int\cf0  Height);\
+    \cf3 void\cf0  setStatus(\cf3 int\cf0  Status);\
+    \
+    \cf3 int\cf0  getXpos();\
+    \cf3 int\cf0  getYpos();\
+    \cf3 int\cf0  getWidth();\
+    \cf3 int\cf0  getHeight();\
+    \cf3 int\cf0  getStatus();\
+    \
+\cf3 private\cf0 :\
+    \
+    \cf3 int\cf0  y_pos, x_pos, width, height, status;\
+    \
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ CARJACKER - cpp\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\
+\cf3 #include \cf4 "CarJacker.h"\cf3 \
+\cf0 \
+\cf3 #include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf5 CarJacker\cf0 ::CarJacker()\{\
+    \cf5 setStatus\cf0 (4);\
+    \cf5 setBullets\cf0 (10);\
+    \cf5 setXpos\cf0 (150);\
+    \cf5 setYpos\cf0 (500);\
+    \
+    \cf5 setHeight\cf0 (20);\
+    \cf5 setWidth\cf0 (10);\
+    \
+    \cf5 dir\cf0  = 0;\
+	Bullets = 0;\
+    \
+\}\
+\
+\cf3 void\cf0  \cf5 CarJacker\cf0 ::setBullets(\cf3 int\cf0  bull)\{\
+    \
+    \cf3 if\cf0  (bull > 0) \{\
+        \cf5 bullets\cf0  = bull;\
+    \}\
+\
+\}\
+\
+\cf3 int\cf0  \cf5 CarJacker\cf0 ::getBullets()\{\
+\
+    \cf3 return\cf0  \cf5 bullets\cf0 ;\
+\}\
+\
+\cf3 void\cf0  \cf5 CarJacker\cf0 ::move_position()\{\
+    \
+   \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+       \cf3 if\cf0  ((\cf5 getXpos\cf0 () + \cf5 speed\cf0 ) > 800)\{\
+           \cf5 dir\cf0  = 1;\
+       \}\
+       \cf3 if\cf0  ((\cf5 getXpos\cf0 () - \cf5 speed\cf0 ) < 0)\{\
+           \cf5 dir\cf0  = 0;\
+       \}\
+       \
+       \cf3 if\cf0 (\cf5 dir\cf0  == 0)\{\
+           \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () + \cf5 speed\cf0 ;\
+           \cf5 setXpos\cf0 (newxpos);\
+       \}\
+       \cf3 if\cf0 (\cf5 dir\cf0  == 1)\{\
+           \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () - \cf5 speed\cf0 ;\
+           \cf5 setXpos\cf0 (newxpos);\
+       \}\
+       \cf5 cout\cf0  << \cf4 "Carjacker MOVED to: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0 << \cf5 getYpos\cf0 () <<\cf4 "\\t "\cf0 ;\
+\
+       \
+   \} \cf3 else\cf0  \{\
+       \cf5 cout\cf0  << \cf4 "Carjacker DEAD!! Stuck at: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0  <<\cf5 getYpos\cf0 () << \cf4 "\\t   "\cf0  ;       \
+   \}\
+\}\
+\
+\cf3 void\cf0  \cf5 CarJacker\cf0 ::fire_weapon()\{\
+    \
+    \cf3 if\cf0 (\cf5 getStatus\cf0 ()!=0)\
+    \{\
+        \cf3 if\cf0  (\cf5 getBullets\cf0 () == 0) \{\
+            \cf5 cout\cf0  << \cf4 "Carjacker has no more bullets left"\cf0 ;\
+            \
+    \} \cf3 else\cf0  \{\
+        \cf3 int\cf0  newbullet = \cf5 getBullets\cf0 ()-1;\
+        \cf5 setBullets\cf0 (newbullet);\
+        \
+        \cf5 cout\cf0  << \cf4 "Carjacker Fired GUN ("\cf0  << newbullet << \cf4 " bullets remain)"\cf0 ;\
+        \
+        \}\
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "No Weapon Fired!! Carjacker DEAD!!"\cf0 ;\
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 CarJacker\cf0 ::update_status()\{\
+    \
+    \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+    \
+        \cf3 double\cf0  newstatus = \cf5 getStatus\cf0 () - 1;\
+        \cf5 setStatus\cf0 (newstatus);\
+        \cf3 double\cf0  health = ((newstatus/4) * 100);\
+        \
+    \cf3 if\cf0 (newstatus!=0)\{\
+        \cf5 cout\cf0  << \cf4 "*OUCH* Carjacker hit!  "\cf0  << health <<\cf4 "% life remaining"\cf0 ;\
+\
+    \} \cf3 else\cf0  \{\
+        \
+        \cf5 cout\cf0  << \cf4 "*AAARGHH* Carjacker JUST DIED!"\cf0 ;\
+        \}\
+    \}\
+    \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Carjacker is already DEAD!"\cf0 ;\
+        \}\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ CarJacker - Header\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\cf3 #pragma once\
+#include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+#include \cf4 "Enemy.h"\cf3 \
+\cf0 \
+\cf3 using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\
+\cf3 class\cf0  CarJacker : \cf3 public\cf0  \cf5 Enemy\cf0 \{\
+\
+\cf3 public\cf0 :\
+    \cf3 virtual\cf0  \cf3 void\cf0  move_position();\
+    \cf3 virtual\cf0  \cf3 void\cf0  fire_weapon();\
+    \cf3 virtual\cf0  \cf3 void\cf0  update_status();\
+    \
+    \cf3 int\cf0  getBullets();\
+    \cf3 void\cf0  setBullets(\cf3 int\cf0  bull);\
+    \
+    \cf3 const\cf0  \cf3 int\cf0  speed = 6;\
+    \
+    \cf3 int\cf0  dir;\
+    \
+    CarJacker();\
+    \
+\cf3 protected\cf0 :\
+    \
+\cf3 private\cf0 :\
+\
+    \cf3 int\cf0  bullets;\
+    \
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ Helicopter - Cpp\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\
+\cf3 #include \cf4 "Helicopter.h"\cf3 \
+\cf0 \
+\cf3 #include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf5 Helicopter\cf0 ::Helicopter()\{\
+    \cf5 setStatus\cf0 (7);\
+    \cf5 setMissiles\cf0 (6);\
+    \cf5 setXpos\cf0 (750);\
+    \cf5 setYpos\cf0 (300);\
+    \
+    \cf5 setHeight\cf0 (60);\
+    \cf5 setWidth\cf0 (100);\
+    \cf5 dir\cf0  = 1;\
+\}\
+\
+\cf3 int\cf0  \cf5 Helicopter\cf0 ::getMissiles()\{\
+    \cf3 return\cf0  \cf5 Missiles\cf0 ;\
+\}\
+\
+\cf3 void\cf0  \cf5 Helicopter\cf0 ::setMissiles(\cf3 int\cf0  miss)\{\
+    \cf3 if\cf0 (miss>0)\{\
+        \cf5 Missiles\cf0  = miss;\
+    \}\
+\}\
+\cf3 void\cf0  \cf5 Helicopter\cf0 ::move_position()\{\
+    \
+    \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+        \cf3 if\cf0  ((\cf5 getXpos\cf0 () + \cf5 speed\cf0 ) > 800)\{\
+            \cf5 dir\cf0  = 1;\
+        \}\
+        \cf3 if\cf0  ((\cf5 getXpos\cf0 () - \cf5 speed\cf0 ) < 0)\{\
+            \cf5 dir\cf0  = 0;\
+        \}\
+        \
+        \cf3 if\cf0 (\cf5 dir\cf0  == 0)\{\
+            \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () + \cf5 speed\cf0 ;\
+            \cf5 setXpos\cf0 (newxpos);\
+        \}\
+        \cf3 if\cf0 (\cf5 dir\cf0  == 1)\{\
+            \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () - \cf5 speed\cf0 ;\
+            \cf5 setXpos\cf0 (newxpos);\
+        \}\
+        \
+        \cf5 cout\cf0  << \cf4 "Helicopter MOVED to: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0 << \cf5 getYpos\cf0 () <<\cf4 "\\t "\cf0 ;\
+        \
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Helicopter DOWN!! Stuck at: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0  <<\cf5 getYpos\cf0 () << \cf4 "\\t   "\cf0  ;        \
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 Helicopter\cf0 ::fire_weapon()\{\
+\
+    \cf3 if\cf0 (\cf5 getStatus\cf0 () != 0)\
+    \{\
+        \cf3 if\cf0  (\cf5 getMissiles\cf0 () == 0) \{\
+            \cf5 cout\cf0  << \cf4 "Helicopter has no more missiles"\cf0 ;\
+            \
+        \} \cf3 else\cf0  \{\
+            \cf3 int\cf0  newmiss = \cf5 getMissiles\cf0 () - 1;\
+            \cf5 setMissiles\cf0 (newmiss);\
+            \
+            \cf5 cout\cf0  << \cf4 "Helicopter Fired a MISSILE ("\cf0  << newmiss << \cf4 " missiles remain)"\cf0 ;\
+        \}\
+    \}\
+    \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "No Weapon Fired!! Helicopter DOWN!!"\cf0 ;\
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 Helicopter\cf0 ::update_status()\{\
+    \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+        \
+        \cf3 double\cf0  newstatus = \cf5 getStatus\cf0 () - 1;\
+        \cf5 setStatus\cf0 (newstatus);\
+        \cf3 double\cf0  health = ((newstatus/7) * 100);\
+        \
+        \cf3 if\cf0 (newstatus!=0)\{\
+            \cf5 cout\cf0  << \cf4 "*PING* Helicopter HIT!  "\cf0  << health <<\cf4 "% life remaining"\cf0 ;\
+            \
+        \} \cf3 else\cf0  \{\
+            \
+            \cf5 cout\cf0  << \cf4 "Helicopter was SHOT DOWN!!!"\cf0 ;\
+        \}\
+    \}\
+    \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Helicopter is Already DOWN!"\cf0 ;\
+    \}\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ Helicopter - Header\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\cf3 #pragma once\
+#include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+#include \cf4 "Enemy.h"\cf3 \
+\cf0 \
+\cf3 using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\
+\cf3 class\cf0  Helicopter : \cf3 public\cf0  \cf5 Enemy\cf0 \{\
+    \
+\cf3 public\cf0 :\
+    \cf3 virtual\cf0  \cf3 void\cf0  move_position();\
+    \cf3 virtual\cf0  \cf3 void\cf0  fire_weapon();\
+    \cf3 virtual\cf0  \cf3 void\cf0  update_status();\
+    \
+    \cf3 int\cf0  getMissiles();\
+    \cf3 void\cf0  setMissiles(\cf3 int\cf0  miss);\
+    \
+    \cf3 const\cf0  \cf3 int\cf0  speed = 15;\
+    \
+    \cf3 int\cf0  dir;\
+    \
+    Helicopter();\
+    \
+\cf3 protected\cf0 :\
+    \
+\cf3 private\cf0 :\
+    \cf3 int\cf0  Missiles;\
+\};\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ PitBull - CPP\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\cf3 #include \cf4 "PitBull.h"\cf3 \
+\cf0 \
+\cf3 #include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\cf5 PitBull\cf0 ::PitBull()\{\
+    \cf5 setStatus\cf0 (2);\
+    \cf5 setBites\cf0 (0);\
+    \cf5 setXpos\cf0 (350);\
+    \cf5 setYpos\cf0 (500);\
+    \
+    \cf5 setHeight\cf0 (10);\
+    \cf5 setWidth\cf0 (15);\
+    \cf5 dir\cf0  = 0;\
+    \
+\}\
+\
+\cf3 int\cf0  \cf5 PitBull\cf0 ::getBites()\{\
+    \cf3 return\cf0  \cf5 Bites\cf0 ;\
+\}\
+\
+\cf3 void\cf0  \cf5 PitBull\cf0 ::setBites(\cf3 int\cf0  bites)\{\
+    \cf3 if\cf0 (bites>0)\{\
+        \cf5 Bites\cf0  = bites;\
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 PitBull\cf0 ::move_position()\{\
+    \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+        \cf3 if\cf0  ((\cf5 getXpos\cf0 () + \cf5 speed\cf0 ) > 800)\{\
+            \cf5 dir\cf0  = 1;\
+        \}\
+        \cf3 if\cf0  ((\cf5 getXpos\cf0 () - \cf5 speed\cf0 ) < 0)\{\
+            \cf5 dir\cf0  = 0;\
+        \}\
+        \
+        \cf3 if\cf0 (\cf5 dir\cf0  == 0)\{\
+            \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () + \cf5 speed\cf0 ;\
+            \cf5 setXpos\cf0 (newxpos);\
+        \}\
+        \cf3 if\cf0 (\cf5 dir\cf0  == 1)\{\
+            \cf3 int\cf0  newxpos = \cf5 getXpos\cf0 () - \cf5 speed\cf0 ;\
+            \cf5 setXpos\cf0 (newxpos);\
+        \}\
+        \
+        \cf5 cout\cf0  << \cf4 "PitBull MOVED to: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0 << \cf5 getYpos\cf0 () << \cf4 "\\t "\cf0 ;\
+        \
+    \} \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "Pitbull DEAD!! Stuck at: "\cf0  << \cf5 getXpos\cf0 () << \cf4 ", "\cf0  <<\cf5 getYpos\cf0 () << \cf4 "\\t   "\cf0  ;\
+        \
+    \}\
+\}\
+\
+\cf3 void\cf0  \cf5 PitBull\cf0 ::fire_weapon()\{\
+    \cf3 if\cf0 (\cf5 getStatus\cf0 ()!=0)\
+    \{\
+        \cf3 int\cf0  newbite = \cf5 getBites\cf0 ()+1;\
+        \cf5 setBites\cf0 (newbite);\
+        \cf5 cout\cf0  << \cf4 "PitBull used BITE! ("\cf0  << \cf5 getBites\cf0 () << \cf4 " bites TOTAL)"\cf0 ;\
+    \}\
+    \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "NO WEAPON FIRED!! PitBull DEAD!!"\cf0 ;\
+    \}\
+    \
+\}\
+\
+\cf3 void\cf0  \cf5 PitBull\cf0 ::update_status()\{\
+    \cf3 if\cf0  (\cf5 getStatus\cf0 ()!=0) \{\
+        \
+        \cf3 double\cf0  newstatus = \cf5 getStatus\cf0 ()-1;\
+        \cf5 setStatus\cf0 (newstatus);\
+        \cf3 double\cf0  health = ((newstatus/2) * 100);\
+        \
+        \cf3 if\cf0 (newstatus!=0)\{\
+            \cf5 cout\cf0  << \cf4 "*WOOF* PitBull hit!  "\cf0  << health <<\cf4 "% life remaining"\cf0 ;\
+            \
+        \} \cf3 else\cf0  \{\
+            \
+            \cf5 cout\cf0  << \cf4 "PitBull DEAD!!!"\cf0 ;\
+        \}\
+    \}\
+    \cf3 else\cf0  \{\
+        \cf5 cout\cf0  << \cf4 "PitBull is Already DEAD!"\cf0 ;\
+    \}\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf2 /*\
+ PitBull - Header\
+ \
+ Project3\
+ Robert Florence\
+ Professor Ferguson\
+ Comp Sci. 236\
+ Project 3\
+ this code implements an inheritance\
+ hierarchy with polymorphism and virtual functions\
+ */\cf0 \
+\
+\cf3 #pragma once\
+#include \cf4 <string>\cf3 \
+#include \cf4 <iostream>\cf3 \
+#include \cf4 "Enemy.h"\cf3 \
+\cf0 \
+\cf3 using\cf0  \cf3 namespace\cf0  \cf5 std\cf0 ;\
+\
+\
+\cf3 class\cf0  PitBull : \cf3 public\cf0  \cf5 Enemy\cf0 \{\
+    \
+\cf3 public\cf0 :\
+    \cf3 virtual\cf0  \cf3 void\cf0  move_position();\
+    \cf3 virtual\cf0  \cf3 void\cf0  fire_weapon();\
+    \cf3 virtual\cf0  \cf3 void\cf0  update_status();\
+    \
+    \cf3 const\cf0  \cf3 int\cf0  speed = 3;\
+    \
+    \cf3 int\cf0  dir;\
+    \
+    PitBull();\
+    \
+    \cf3 int\cf0  getBites();\
+    \cf3 void\cf0  setBites(\cf3 int\cf0  bites);\
+\
+\cf3 protected\cf0 :\
+    \
+\cf3 private\cf0 :\
+    \cf3 int\cf0  Bites;\
+    \
+\};}
